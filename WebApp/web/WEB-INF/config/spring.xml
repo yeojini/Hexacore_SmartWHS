@@ -62,6 +62,43 @@
 		</bean>
 	</mvc:interceptors>
 	
+	<!-- 1. Database Setting -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<!-- <property name="url"
+			value="jdbc:oracle:thin:@70.12.113.195:1521:xe" /> -->
+		<property name="url"
+			value="jdbc:oracle:thin:@15.165.188.223:1521:xe" />
+		<property name="username" value="system" />
+		<property name="password" value="111111" />
+	</bean>
+
+	<!-- 2. Transaction Setting -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" /> <!-- dataSource를 기반으로 트랜잭션을 처리하겠다는것. -->
+	</bean>
+
+	<!-- 3. MyBatis Setting -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:com/mybatis/mybatis.xml" />
+	</bean>
+
+	<!-- 4. Spring Mybatis Connect -->
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 5. Mapper Setting -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.mapper" />
+	</bean>
 
 
 </beans>

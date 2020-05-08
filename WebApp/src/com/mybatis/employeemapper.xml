@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.EmployeeMapper">
+	
+	<insert id="insert" parameterType="employee">
+		INSERT INTO employee VALUES (#{empno},#{empname},#{emppw},#{empjob},#{empemail}, #{empphone}, #{wareid}, #{warename})	
+	</insert>
+	
+	<update id="update" parameterType="employee">
+		UPDATE employee
+		<set> 
+			<if test = "empname != null">empname=#{empname},</if>
+			<if test = "emppw != null">emppw=#{emppw},</if>
+			<if test = "empjob != null">empjob=#{empjob},</if>
+			<if test = "empemail != null">empemail=#{empemail},</if>
+			<if test = "empphone != null">empphone=#{empphone},</if>
+			<if test = "wareid != null">wareid=#{wareid},</if>
+			<if test = "warename != null">warename=#{warename}</if>
+		</set>
+		WHERE empno=#{empno}
+	</update>
+	
+	<delete id="delete" parameterType="employee">
+		DELETE FROM employee WHERE empno=#{empno}
+	</delete>
+	
+	<select id="select" parameterType="employee" 
+	resultType="employee">
+		SELECT * FROM employee
+		<where>
+			empno=#{empno}
+			<if test = "emppw != null and emppw != ''">and emppw=#{emppw}</if>
+		</where>
+		
+	</select>
+	
+	<select id="selectAll" parameterType="employee" resultType="employee">
+		SELECT * FROM employee
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

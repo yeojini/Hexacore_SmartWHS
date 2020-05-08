@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.InvoicedetailMapper">
+	
+	<insert id="insert" parameterType="invoicedetail">
+		INSERT INTO invoicedetail
+		VALUES (invoicedtlseq.nextval,#{itemid},#{itemname},#{wareid},#{warename},#{invoicestat},#{invoicedtlqty},#{empno,jdbcType=VARCHAR},#{empname,jdbcType=VARCHAR},#{invoiceid},sysdate)	
+	</insert>
+	
+	<update id="update" parameterType="invoicedetail">
+		UPDATE invoicedetail SET invoiceid=#{invoiceid} WHERE invoicedtlid=#{invoicedtlid}
+	</update>
+	
+	<delete id="delete" parameterType="invoicedetail">
+		DELETE FROM invoicedetail WHERE invoicedtlid=#{invoicedtlid}
+	</delete>
+	
+	<select id="select" parameterType="invoicedetail" 
+	resultType="invoicedetail">
+		SELECT * FROM invoicedetail WHERE invoicedtlid=#{invoicedtlid}
+	</select>
+	
+	<select id="selectAll" parameterType="invoicedetail" resultType="invoicedetail">
+		SELECT * FROM invoicedetail
+		<where>
+			<if test = "invoiceid != null and invoiceid != '' and invoiceid != 0">
+				invoiceid=#{invoiceid}
+			</if>
+			
+		</where>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

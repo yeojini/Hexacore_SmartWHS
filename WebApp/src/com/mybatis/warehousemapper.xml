@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.WarehouseMapper">
+	
+	<insert id="insert" parameterType="warehouse">
+		INSERT INTO warehouse VALUES (#{wareid},#{warename},#{warecate},#{warescale},#{waretype})	
+	</insert>
+	
+	<update id="update" parameterType="warehouse">
+		UPDATE warehouse SET warename=#{warename},warecate=#{warecate},warescale=#{warescale},waretype=#{waretype} WHERE wareid=#{wareid}
+	</update>
+	
+	<delete id="delete" parameterType="warehouse">
+		DELETE FROM warehouse WHERE wareid=#{wareid}
+	</delete>
+	
+	<select id="select" parameterType="warehouse" 
+	resultType="warehouse">
+		SELECT * FROM warehouse WHERE wareid=#{wareid}
+	</select>
+	
+	<select id="selectAll" parameterType="warehouse" resultType="warehouse">
+		SELECT * FROM warehouse 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

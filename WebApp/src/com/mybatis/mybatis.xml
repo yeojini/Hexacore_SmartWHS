@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.vo.ForkliftVO" alias="forklift"/>
+		<typeAlias type="com.vo.WarehouseVO" alias="warehouse"/>
+		<typeAlias type="com.vo.ItemVO" alias="item"/>
+		<typeAlias type="com.vo.InvoiceVO" alias="invoice"/>
+		<typeAlias type="com.vo.InvoicedetailVO" alias="invoicedetail"/>
+		<typeAlias type="com.vo.EmployeeVO" alias="employee"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/mybatis/forkliftmapper.xml"/>
+		<mapper resource="com/mybatis/warehousemapper.xml"/>
+		<mapper resource="com/mybatis/itemmapper.xml"/>
+		<mapper resource="com/mybatis/invoicemapper.xml"/>
+		<mapper resource="com/mybatis/invoicedetailmapper.xml"/>
+		<mapper resource="com/mybatis/employeemapper.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+

@@ -21,7 +21,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
-		<url-pattern>*.hc</url-pattern>
+		<url-pattern>*.pc</url-pattern>
 	</servlet-mapping>
 
 	<!-- Encoding Filter -->
