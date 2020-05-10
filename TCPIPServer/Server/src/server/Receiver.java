@@ -21,10 +21,6 @@ public class Receiver implements Runnable {
 
 	Socket socket;
 	
-	//TEST
-	Task[] tasks = new Task[4];
-	int i=0;
-	
 	public Receiver() {}
 	
 	public Receiver(Socket socket) {
@@ -39,7 +35,7 @@ public class Receiver implements Runnable {
 			oos = new ObjectOutputStream(os);
 		
 		} catch (IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		
@@ -48,35 +44,14 @@ public class Receiver implements Runnable {
 	@Override
 	public void run() {
 		
-		//TEST
-		tasks[0] = new Task(0,"PC",3,3,5);
-		tasks[1] = new Task(1,"TV",5,7,7);
-		tasks[2] = new Task(0,"Monitor",2,10,9);
-		tasks[3] = new Task(1,"PHONE",6,14,5);
-		
-		ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Main.executorService;
-		int poolSize = threadPoolExecutor.getPoolSize();//Ω∫∑πµÂ «Æ ªÁ¿Ã¡Ó æÚ±‚
-		String threadName = Thread.currentThread().getName();//Ω∫∑πµÂ «Æø° ¿÷¥¬ «ÿ¥Á Ω∫∑πµÂ ¿Ã∏ß æÚ±‚
-		
 		ActiveConnection.ipToOos.put(socket.getInetAddress().toString(),oos);
        
-        
 		while(ois!=null) {
 			
 			Msg msg = null;
 			try {
-				System.out.println("Receiver [√— Ω∫∑πµÂ ∞≥ºˆ:" + poolSize + "] ¿€æ˜ Ω∫∑πµÂ ¿Ã∏ß: "+threadName);
-				//msg = (Msg) ois.readObject();
-				//TEST
-//				msg = new Msg("Web","tabletServer");
-//				msg.setTask(tasks[i%4].getIo(), tasks[i%4].getName(), tasks[i%4].getQty(), tasks[i%4].getLocX(), tasks[i%4].getLocY());
-//				ActiveConnection.idToIp.put("tabletServer","/70.12.226.134");
-				
-				//
-				
-				//System.out.println("¡¢º” : "+msg.getSrcID());				
-				
-				//tabletServer ¡¢º”«“∂ß¥¬ Sender «“ « ø‰ æ¯¥Ÿ
+				System.out.println("Receiver [Ï¥ù Ïä§Î†àÎìú Í∞úÏàò:" + poolSize + "] ÏûëÏóÖ Ïä§Î†àÎìú Ïù¥Î¶Ñ: "+threadName);
+				msg = (Msg) ois.readObject();
 				
 				ActiveConnection.idToIp.put(msg.getSrcID(),socket.getInetAddress().toString());
 				
@@ -86,30 +61,23 @@ public class Receiver implements Runnable {
 					Main.executorService.submit(r);
 				}
 				
-				//TEST
-//				i++;
-//				Thread.sleep(10000);
-				
-				
-				
-				
 			} catch (Exception e) {
-				//e.printStackTrace();
-				//ActiveConnection.executorService.shutdown();
+				e.printStackTrace();
+				ActiveConnection.executorService.shutdown();
 				ActiveConnection.ipToOos.remove(socket.getInetAddress().toString());
 					
-				//value ∞™¿∏∑Œ key ∞™ √£±‚
+				//value Í∞íÏúºÎ°ú key Í∞í Ï∞æÍ∏∞
 				for(String id : ActiveConnection.idToIp.keySet()) {
 					if(socket.getInetAddress().toString().equals(ActiveConnection.idToIp.get(id))) {
 						ActiveConnection.idToIp.remove(id);
 					}		
 				}
 				System.out.println("Disconnected : " + socket.getInetAddress().toString());
-				System.out.println("¡¢º” ºˆ : " + ActiveConnection.ipToOos.size());
+				System.out.println("Ï†ëÏÜç Ïàò : " + ActiveConnection.ipToOos.size());
 				
 				break;
-			}//catch	
-		}//while
+			}
+		}
 		
 		try {
 			if (ois != null) {
