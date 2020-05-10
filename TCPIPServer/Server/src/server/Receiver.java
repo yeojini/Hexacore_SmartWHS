@@ -50,7 +50,7 @@ public class Receiver implements Runnable {
 			
 			Msg msg = null;
 			try {
-				System.out.println("Receiver [총 스레드 개수:" + poolSize + "] 작업 스레드 이름: "+threadName);
+				
 				msg = (Msg) ois.readObject();
 				
 				ActiveConnection.idToIp.put(msg.getSrcID(),socket.getInetAddress().toString());
